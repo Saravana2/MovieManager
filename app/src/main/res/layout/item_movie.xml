@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/now_cv"
+    android:layout_marginBottom="@dimen/s20dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:srcCompat="@mipmap/ic_launcher"
+    android:id="@+id/imageView_now"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_now_title"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/s8dp"
+            android:layout_marginTop="@dimen/s8dp"
+            android:layout_toEndOf="@+id/imageView_now"
+            android:layout_toRightOf="@+id/imageView_now"
+            android:maxLength="20"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:text="Captian America"/>
+<TextView
+    android:id="@+id/tv_now_overview"
+    android:layout_below="@+id/tv_now_title"
+    android:layout_marginLeft="@dimen/s8dp"
+    android:layout_marginTop="@dimen/s8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toEndOf="@+id/imageView_now"
+    android:layout_toRightOf="@+id/imageView_now"
+    android:maxLength="180"
+    android:text="Captian America overview"
+    />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

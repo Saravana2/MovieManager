@@ -8,4 +8,10 @@
     <dimen name="s60dp">60dp</dimen>
     <dimen name="s20dp">20dp</dimen>
     <dimen name="s8dp">8dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="s100dp">100dp</dimen>
+    <dimen name="s64dp">64dp</dimen>
+    <dimen name="s48dp">48dp</dimen>
 </resources>

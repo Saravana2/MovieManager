@@ -1,6 +1,7 @@
 package com.example.saravananthangamari.moviemanager.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.saravananthangamari.moviemanager.R;
+import com.example.saravananthangamari.moviemanager.activity.movieDetailActivity;
 import com.example.saravananthangamari.moviemanager.models.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -43,6 +45,7 @@ Context context;
     holder.tv_now_title.setText(movie.getMovieTitle());
     holder.tv_now_overview.setText(movie.getMovieOverview());
     Picasso.with(getContext()).load(movie.getPosterPath())
+            .resize(250, 350)
                 .into(holder.imageView_now);
     }
 
@@ -51,7 +54,7 @@ Context context;
         return movies.size();
     }
 
-     public class ViewHolder extends RecyclerView.ViewHolder{
+     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.imageView_now)
         ImageView imageView_now;
         @BindView(R.id.tv_now_title)
@@ -64,6 +67,16 @@ Context context;
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
         }
-    }
+
+         @Override
+         public void onClick(View v) {
+            Movie movie=movies.get(getAdapterPosition());
+             Intent intent=new Intent(getContext(),movieDetailActivity.class);
+             intent.putExtra("movie",movie);
+             getContext().startActivity(intent);
+
+         }
+     }
 }

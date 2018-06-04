@@ -15,6 +15,7 @@
 <ImageView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/s20dp"
     app:srcCompat="@mipmap/ic_launcher"
     android:id="@+id/imageView_now"
     android:layout_alignParentLeft="true"
@@ -43,7 +44,6 @@
     android:layout_height="wrap_content"
     android:layout_toEndOf="@+id/imageView_now"
     android:layout_toRightOf="@+id/imageView_now"
-    android:maxLength="180"
     android:text="Captian America overview"
     />
 

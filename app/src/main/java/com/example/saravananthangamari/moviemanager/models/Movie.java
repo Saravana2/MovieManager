@@ -1,6 +1,8 @@
 package com.example.saravananthangamari.moviemanager.models;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable{
 
 
     String movieId;

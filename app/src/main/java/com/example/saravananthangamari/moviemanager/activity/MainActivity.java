@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void showfragment(Class fragment){
+    public void showfragment(Class fragment){
         Fragment fragment1=null;
         try {
             fragment1=(Fragment)fragment.newInstance();
@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager=getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.frame_id,fragment1)
-                
                 .commit();
     }
 }

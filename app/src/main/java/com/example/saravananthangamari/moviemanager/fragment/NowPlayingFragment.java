@@ -46,6 +46,7 @@ public class NowPlayingFragment extends Fragment {
 
         MovieRvAdapter movieRvAdapter=new MovieRvAdapter(getContext(),movies);
         now_rvmovie.setAdapter(movieRvAdapter);
+
         return view;
 
     }

@@ -27,4 +27,20 @@
     <string name="confirm_password">Confirm password</string>
     <string name="already_have_account">Already have account</string>
     <string name="e_name">Alphabets only and not empty</string>
+    <string name="e_email">Invalid Email</string>
+    <string name="e_pwdMisMatch">Password mismatch</string>
+    <string name="e_username">username not valid</string>
+    <string name="e_pwd_null">password not null</string>
+
+
+    <string name="FIRST_NAME">FIRST_NAME</string>
+    <string name="LAST_NAME">LAST_NAME</string>
+    <string name="EMAIL_ID">EMAIL_ID</string>
+    <string name="USER_NAME">USER_NAME</string>
+    <string name="PASSWORD">PASSWORD</string>
+    <string name="C_PASSWORD">C_PASSWORD</string>
+    <string name="LOGIN_STATUS">LOGIN_STATUS</string>
+    <string name="FILE_NAMES">1</string>
+    <string name="FILE_LIST">FILE_LIST</string>
+    <string name="LAST_USER">LAST_USER_ID</string>
 </resources>

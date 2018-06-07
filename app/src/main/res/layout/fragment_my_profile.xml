@@ -50,13 +50,15 @@
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="@string/edit_btn"
+        />
 
     <Button
         android:id="@+id/save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="@string/save_btn"
+        android:visibility="gone"/>
 
 
 </LinearLayout>

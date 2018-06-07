@@ -40,7 +40,13 @@
     <string name="PASSWORD">PASSWORD</string>
     <string name="C_PASSWORD">C_PASSWORD</string>
     <string name="LOGIN_STATUS">LOGIN_STATUS</string>
+
+    <string name="FILE_NAME">USERS_DETAILS</string>
+    <string name="LAST_USER">LAST_USER_ID</string>
+
     <string name="FILE_NAMES">1</string>
     <string name="FILE_LIST">FILE_LIST</string>
-    <string name="LAST_USER">LAST_USER_ID</string>
+    <string name="edit_btn">Edit</string>
+    <string name="save_btn">save</string>
+
 </resources>

@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import com.example.saravananthangamari.moviemanager.R;
 import com.example.saravananthangamari.moviemanager.fragment.*;
+import com.example.saravananthangamari.moviemanager.models.UserDetails;
+import com.google.gson.Gson;
 
 import java.util.zip.Inflater;
 
@@ -35,15 +37,15 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 public static String user_email;
-
-
-
+    Gson gson=new Gson();
+    Toolbar toolbar;
+    SharedPreferences s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
@@ -51,17 +53,17 @@ public static String user_email;
         if(info!=null){
             user_email=(String)info.getSerializable("user_email");
         }
-        SharedPreferences s=getSharedPreferences(user_email,0);
+         s=getSharedPreferences(getString(R.string.FILE_NAME),0);
         SharedPreferences.Editor editor=s.edit();
-        editor.putBoolean(getString(R.string.LOGIN_STATUS),true);
+        UserDetails user=gson.fromJson(s.getString(user_email,null),UserDetails.class);
+        user.setLogin_status(true);
+        editor.putString(user_email,gson.toJson(user));
         editor.commit();
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -69,20 +71,10 @@ public static String user_email;
         View vi= navigationView.getHeaderView(0);
         TextView username=(TextView)vi.findViewById(R.id.username);
         TextView userEmail=(TextView)vi.findViewById(R.id.userEmail);
-        username.setText(s.getString(getString(R.string.FIRST_NAME),null)+" "+s.getString(getString(R.string.LAST_NAME),null));
-        userEmail.setText(s.getString(getString(R.string.EMAIL_ID),null));
-
-
+        username.setText(user.getFirstName()+" "+user.getLastName());
+        userEmail.setText(user.getEmailId());
         showfragment(NowPlayingFragment.class);
     }
-
-
-
-    public String getSharedPreferencesValue(String user_email, String fieldName){
-        SharedPreferences preferences=this.getSharedPreferences(user_email,0);
-        return preferences.getString(fieldName,null);
-    }
-
 
     @Override
     public void onBackPressed() {
@@ -144,9 +136,12 @@ public static String user_email;
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_id,fragment1).commit();
             */
         } else if (id == R.id.nav_logout) {
-            SharedPreferences.Editor s=getSharedPreferences(user_email,0).edit();
-            s.putBoolean(getString(R.string.LOGIN_STATUS),false);
-            s.commit();
+            SharedPreferences s=getSharedPreferences(getString(R.string.FILE_NAME),0);
+            SharedPreferences.Editor sEdit=s.edit();
+            UserDetails user=gson.fromJson(s.getString(user_email,null),UserDetails.class);
+            user.setLogin_status(false);
+            sEdit.putString(user_email,gson.toJson(user));
+            sEdit.commit();
             gotoLoginActivity();
         }
 
@@ -174,4 +169,6 @@ public static String user_email;
                 .replace(R.id.frame_id,fragment1)
                 .commit();
     }
+
+
 }

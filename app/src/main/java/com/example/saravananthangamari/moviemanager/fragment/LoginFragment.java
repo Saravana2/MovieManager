@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.example.saravananthangamari.moviemanager.R;
 import com.example.saravananthangamari.moviemanager.activity.LoginActivity;
 import com.example.saravananthangamari.moviemanager.activity.MainActivity;
+import com.example.saravananthangamari.moviemanager.models.UserDetails;
+import com.google.gson.Gson;
 
 import java.io.File;
 
@@ -73,20 +75,25 @@ public void onCreate(Bundle savedInstanceState) {
             public void onClick(View v)
             {
                 Context context=getActivity();
-                SharedPreferences FileNames=context.getSharedPreferences(getString(R.string.FILE_NAMES),0);
+                SharedPreferences userPref=context.getSharedPreferences(getString(R.string.FILE_NAME),0);
                // Toast.makeText(getContext(),FileNames.getStringSet(getString(R.string.FILE_LIST),null).toString(),Toast.LENGTH_LONG).show();
-                if(FileNames.getStringSet(getString(R.string.FILE_LIST),null).contains(u_name.getEditText().getText().toString())){
-                    SharedPreferences preferences=context.getSharedPreferences(u_name.getEditText().getText().toString(),0);
-                    if(pwd.getEditText().getText().toString().equals(preferences.getString(getString(R.string.PASSWORD),null))){
-
-                        SharedPreferences.Editor edit=FileNames.edit();
-                        edit.putString(getString(R.string.LAST_USER),u_name.getEditText().getText().toString());
-                        edit.commit();
-
-                        gotoMovieManager(u_name.getEditText().getText().toString());
+                if(userPref.contains(u_name.getEditText().getText().toString())){
+                    String userdetails=userPref.getString(u_name.getEditText().getText().toString(),null);
+                    if(userdetails!=null) {
+                        Gson gson=new Gson();
+                        UserDetails user =gson.fromJson(userdetails,UserDetails.class);
+                        if (pwd.getEditText().getText().toString().equals(user.getPassword())) {
+                            SharedPreferences.Editor edit=userPref.edit();
+                            edit.putString(getString(R.string.LAST_USER), u_name.getEditText().getText().toString());
+                            edit.commit();
+                            gotoMovieManager(u_name.getEditText().getText().toString());
+                        } else {
+                            Toast.makeText(getContext(), "password wrong", Toast.LENGTH_LONG).show();
+                        }
                     }else{
-                        Toast.makeText(getContext(),"password wrong",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "SignUp again", Toast.LENGTH_LONG).show();
                     }
+
                 }else{
                     Toast.makeText(getContext(),"SignUp First",Toast.LENGTH_LONG).show();
                 }

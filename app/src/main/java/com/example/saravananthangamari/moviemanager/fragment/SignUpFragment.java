@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.saravananthangamari.moviemanager.R;
+import com.example.saravananthangamari.moviemanager.models.UserDetails;
+import com.google.gson.Gson;
 
 import java.util.HashSet;
 import java.util.regex.Pattern;
@@ -82,36 +85,26 @@ public class SignUpFragment extends Fragment {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(firstName && lastName && emailId && userName && pwd_flag && c_pwd_flag){
                     Context context=getActivity();
 
-SharedPreferences pref=context.getSharedPreferences(getString(R.string.FILE_NAMES),0);
-SharedPreferences.Editor edit=pref.edit();
-HashSet<String> set= (HashSet<String>) pref.getStringSet(getString(R.string.FILE_LIST),new HashSet<String>());
-set.add(email.getEditText().getText().toString());
-edit.putStringSet(getString(R.string.FILE_LIST),set);
-edit.commit();
-                    SharedPreferences preferences=context.getSharedPreferences(email.getEditText().getText().toString(),0);
-                    SharedPreferences.Editor editor=preferences.edit();
-                    editor.putBoolean(getString(R.string.LOGIN_STATUS),false);
-                    editor.putString(getString(R.string.FIRST_NAME),first_name.getEditText().getText().toString());
-                    editor.putString(getString(R.string.LAST_NAME),last_name.getEditText().getText().toString());
-                    editor.putString(getString(R.string.EMAIL_ID),email.getEditText().getText().toString());
-                    editor.putString(getString(R.string.USER_NAME),user_name.getEditText().getText().toString());
-                    editor.putString(getString(R.string.PASSWORD),password.getEditText().getText().toString());
-                    editor.putString(getString(R.string.C_PASSWORD),c_password.getEditText().getText().toString());
+                    SharedPreferences pref=context.getSharedPreferences(getString(R.string.FILE_NAME),0);
+                    SharedPreferences.Editor edit=pref.edit();
 
-                    editor.commit();
+                    UserDetails user=new UserDetails(first_name.getEditText().getText().toString(),last_name.getEditText().getText().toString(),user_name.getEditText().getText().toString()
+                    ,email.getEditText().getText().toString(),password.getEditText().getText().toString(),c_password.getEditText().getText().toString(),false);
+                    Gson gson=new Gson();
+                    String user_json=gson.toJson(user);
+                   // Log.i("json",user_json);
+                    edit.putString(email.getEditText().getText().toString(),user_json);
+                    edit.commit();
                     gotoLogin();
 
                 }else{
                     Toast.makeText(getContext(),"Please fill all the details",Toast.LENGTH_LONG).show();
                 }
-
             }
         });
-
         return view;
     }
 

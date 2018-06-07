@@ -12,20 +12,23 @@ import android.widget.Toast;
 
 import com.example.saravananthangamari.moviemanager.R;
 import com.example.saravananthangamari.moviemanager.fragment.LoginFragment;
+import com.example.saravananthangamari.moviemanager.models.UserDetails;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 
 public class LoginActivity extends AppCompatActivity {
+    Gson gson=new Gson();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        SharedPreferences sharedPreferences=getSharedPreferences(getString(R.string.FILE_NAMES),0);
+        SharedPreferences sharedPreferences=getSharedPreferences(getString(R.string.FILE_NAME),0);
         if(sharedPreferences.contains(getString(R.string.LAST_USER))){
-            SharedPreferences userPref=getSharedPreferences(sharedPreferences.getString(getString(R.string.LAST_USER),null),0);
-            if(userPref.getBoolean(getString(R.string.LOGIN_STATUS),false)){
-                gotoMovieManager(sharedPreferences.getString(getString(R.string.LAST_USER),null));
+            UserDetails user=gson.fromJson(sharedPreferences.getString(sharedPreferences.getString(getString(R.string.LAST_USER),null),null),UserDetails.class);
+            if(user.isLogin_status()){
+                gotoMovieManager(user.getEmailId());
             }else{
                 showfragment(LoginFragment.class);
             }
